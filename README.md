@@ -9,10 +9,10 @@ Este Script es un instalador Automatizado de Sitios Wordpres para servidores bas
 
 # Instalacion:
 
-git clone https://github.com/byteSalgado/Wordpress_Installer
-cd Wordpress_Installer
-chmod 777 *
-./install.sh
+* git clone https://github.com/byteSalgado/Wordpress_Installer
+* cd Wordpress_Installer
+* chmod 777 *
+* ./install.sh
 
 # Base de datos:
 
