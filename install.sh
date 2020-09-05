@@ -1,55 +1,86 @@
 #!/bin/bash
-clear
-printf "\e[1;35m
 
-#     #  ######  #       #        ####
-#     #  #       #       #       #    #
-#######  #####   #       #       #    #
-#     #  #       #       #       #    #
-#     #  #       #       #       #    #
-#     #  ######  ######  ######   ####
+#Script created for Facu Salgado: https://github.com/ByteSalgado
 
-\n"
-sleep 4
-printf "\e[1;32mEste Script instalara Wordpress en su servidor\n"
-sleep 4
-printf "\e[1;34mEste Script funciona en sistemas basados en debian\n"
-sleep 4
-printf "\e[1;32mSi te sirve regalanos una estrella en github\n"
-sleep 4
-printf "\e[1;34mIniciaremos la instalacion en\e[1;31m 5\e[1;34m segundos\n"
+# trap function ctrl + c 
+trap ctrl_c INT
+
+#Colores
+white="\033[1;37m"
+grey="\033[0;37m"
+purple="\033[0;35m"
+red="\033[1;31m"
+green="\033[1;32m"
+yellow="\033[1;33m"
+Purple="\033[0;35m"
+Cyan="\033[0;36m"
+Cafe="\033[0;33m"
+Fiuscha="\033[0;35m"
+blue="\033[1;34m"
+nc="\e[0m"
+
+function ctrl_c() {
+
+echo -e "$purple(*)$blue Presionaste la tecla$red CTRL + C$blue Saliendo del programa.."
+sleep 2
+echo -e "$purple(*)$blue Gracias por usar mi Script by$red Facu Salgado$nc"
 sleep 1
-printf "\e[1;31m4\e[1;34m segundos..\n"
-sleep 1
-printf "\e[1;31m3\e[1;34m segundos..\n"
-sleep 1
-printf "\e[1;31m2\e[1;34m segundos..\n"
-sleep 1
-printf "\e[1;31m1\e[1;34m segundos..\n"
-sleep 1
-printf "\e[1;32mIniciando Instalacion...\n"
-sleep 4
+exit
+
+}
+
+#comprobar directorio
+directory=$(pwd)
+
+
+#Opciones menu
+
+a="Instalar Wordpress"
+b="Ver datos base de datos"
+c="Salir"
+
+
+#logo y bienvenida
 clear
-printf "\e[1;32mActualizando paquetes...\n"
-sleep 4
-apt-get update -y && apt-get upgrade -y 
+tput setaf 3  && toilet --filter border Wordpress
+sleep 1
+echo -e "$purple(*)$blue Script created by$red Facu Salgado"
+sleep 2
+echo -e "$purple(*)$blue regalanos una estrella en github$yellow"
+sleep 2
+echo
+echo
+
+export PS3=$'\e[01;35m(*)\e[01;32m Selecciona una Opcion:\e[01;33m '
+
+#menu principal
+
+function menu_principal() {
+select menu in "$a" "$b" "$c";
+do
+case $menu in
+$a)
+echo -e "$purple(*)$blue Bien vamos a instalar Wordpress en su sistema"
+sleep 2
+echo -e "$purple(*)$blue actualizando repositorios..."
+apt-get update -y && apt-get upgrade -y
+mkdir db_setup
+mkdir db
 clear
-printf "\e[1;32mPaquetes actualizados...\n"
-sleep 4
-printf "\e[1;34mAhora instalaremos las dependencias\n"
-sleep 4
-printf "\e[1;34mInstalando Dependencias en\e[1;31m 5\e[1;34m segundos\n"
+echo -e "$purple(*)$blue Repositorios actualizados."
+sleep 2
+echo -e "$purple(*)$blue Instalaremos las dependencias en 5 segundos.."
 sleep 1
-printf "\e[1;31m4\e[1;34m segundos..\n"
+echo -e "$purple(*)$blue 4 segundos.."
 sleep 1
-printf "\e[1;31m3\e[1;34m segundos..\n"
+echo -e "$purple(*)$blue 3 segundos.."
 sleep 1
-printf "\e[1;31m2\e[1;34m segundos..\n"
+echo -e "$purple(*)$blue 2 segundos.."
 sleep 1
-printf "\e[1;31m1\e[1;34m segundos..\n"
+echo -e "$purple(*)$blue 1 segundos.."
 sleep 1
-printf "\e[1;32mIniciando Instalacion...\n"
-sleep 4
+echo -e "$purple(*)$green Instalacion iniciada"
+sleep 2
 clear
 apt-get install apache2 -y
 apt install php7.0-mysql -y 
@@ -77,46 +108,42 @@ echo "<Directory /var/www/html>
 rm /var/www/html/index.html
 systemctl restart apache2.service
 clear
-printf "\e[1;32mInstalacion dependencias finalizada..\n"
+echo -e "$purple(*)$blue Dependencias instaladas"
+sleep 1
+echo -e "$purple(*)$blue Ahora debera configurar su password root para su MYSQL"
 sleep 4
-printf "\e[1;31mAhora debera\e[1;32m setear la paswoord root del mysql..\n"
-sleep 5
+echo -e "$purple(*)$blue iniciara el proceso de configuracion, siga los pasos.."
 sudo mysql_secure_installation
-printf "\e[1;35mContraseña seteada correctamente\n"
-sleep 5
-cd /home/
 clear
-echo "
-CREATE DATABASE Wordpress;
-CREATE USER 'Wordpress_user'@'%' IDENTIFIED BY 'userwordpress2020';
-GRANT ALL PRIVILEGES ON Wordpress.* TO 'Wordpress_user'@'%';
-FLUSH PRIVILEGES;
-exit " >> /home/db_wordpress.sql
-printf "\e[1;32mA CONTINUACION INTRODUSCA LA PASSWORD SETEADA\n"
+echo -e "$purple(*)$blue MYSQL configurado correctamente"
 sleep 2
-mysql -u root -p < db_wordpress.sql
-printf "\e[1;32mBase de datos seteada correctamente\n"
-sleep 7
-clear
-printf "\e[1;32mLos datos de la base de datos Wordpress son los siguientes\n"
-sleep 6
-echo
-echo
-printf "\e[1;31mADVERTENCIA: Por favor copie estos datos\n"
-sleep 5
-echo
-echo
-printf "\e[1;32mDB Name:\e[1;35m Wordpress\n"
-printf "\e[1;32mDB user:\e[1;35m Wordpress_user\n"
-printf "\e[1;32mDB Password:\e[1;35m userwordpress2020\n"
-sleep 10
-echo
-echo
-printf "\e[1;31mADVERTENCIA:\e[1;32m Debe Modificar estos datos, mas adelante\n"
-sleep 5
-printf "\e[1;32mDescargando Wordpress en 5 segundos\n"
-sleep 5
-cd /tmp
+echo -e "$purple(*)$blue Le pediremos los datos para configurar los datos de su DB de wordpress"
+sleep 2
+printf "\e[1;35mIngrese su DB User:\e[1;34m "
+read userdb
+printf "\e[1;35mIngrese su DB name:\e[1;34m "
+read dbname
+printf "\e[1;35mIngrese su DB password:\e[1;34m "
+read dbpassword
+echo -e "$purple(*)$blue Bien ahora crearemos su base de datos.."
+echo "
+CREATE DATABASE $dbname;
+CREATE USER '$dbuser'@'%' IDENTIFIED BY '$dbpassword';
+GRANT ALL PRIVILEGES ON $dbname.* TO '$dbuser'@'%';
+FLUSH PRIVILEGES;
+exit " >> $directory/db/db_wordpress.sql
+echo -e "$purple(*)$blue Archivo SQL Creado correctamente"
+sleep 2
+echo -e "$purple(*)$blue a continuacion ingrese su root MYSQL password"
+mysql -u root -p < $directory/db/db_wordpress.sql
+echo -e "$purple(*)$bluela base de datos se configuro correctamente"
+echo "
+Database Name: $dbname
+Database User: $dbuser
+Database Password: $dbpassword
+" >> $directory/db_setup/sudb.txt
+echo -e "$purple(*)$blue la a continuacion iniciaremos el proceso de instalacion de wordpress"
+sleep 2
 wget http://wordpress.org/latest.tar.gz
 tar xfz latest.tar.gz
 cp -rf wordpress/* /var/www/html/
@@ -125,20 +152,41 @@ chgrp -R www-data /var/www/html/
 ls -al /var/www/html
 clear
 service apache2 restart
-printf "\e[1;32mSe ha completado la instalacion, dirigase al navegador\n"
+echo -e "$purple(*)$blue La instalacion ha finalizado dirigase a su IP apache y configure su Wordpress"
 sleep 2
-printf "\e[1;32mColoque la ip de su VPS y instale wordpress\n"
+echo -e "$purple(*)$blue Volviendo al menu principal.."
+menu_principal
+
+
+
+;;
+
+$b)
+sleep 1
+echo -e "$purple(*)$blue si aparece los datos de la db significa que wordpress esta instalado"
+sleep 1
+echo -e "$purple(*)$blue Sus datos de su base de datos son:"
+cat $directory/db_setup/sudb.txt
 echo
 echo
-printf "\e[1;31mAVISO: Por favor copie estos datos\n"
-sleep 5
-echo
-echo
-printf "\e[1;32mDB Name:\e[1;35m Wordpress\n"
-printf "\e[1;32mDB user:\e[1;35m Wordpress_user\n"
-printf "\e[1;32mDB Password:\e[1;35m userwordpress2020\n"
-echo
-echo
-printf "\e[1;32mFin del Script.. regala una estrella en github\n"
-sleep 5
-printf "\e[1;34mScript creado por\e[1;35m Facundo Salgado\n"
+echo -e "$purple(*)$blue Volviendo al menu principal.."
+sleep 2
+menu_principal
+
+;;
+
+$c)
+echo -e "$purple(*)$blue Saliendo del programa, gracias por utilizar nuestro script."
+sleep 2
+echo -e "$purple(*)$blue created by$red Facu Salgado"
+exit
+;;
+
+*)
+
+echo -e "$purple(*)$red $REPLY$blue Opcion no valida"
+;;
+esac
+done
+}
+menu_principal
