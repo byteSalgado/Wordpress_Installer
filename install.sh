@@ -128,8 +128,8 @@ read dbpassword
 echo -e "$purple(*)$blue Bien ahora crearemos su base de datos.."
 echo "
 CREATE DATABASE $dbname;
-CREATE USER '$dbuser'@'%' IDENTIFIED BY '$dbpassword';
-GRANT ALL PRIVILEGES ON $dbname.* TO '$dbuser'@'%';
+CREATE USER '$userdb'@'%' IDENTIFIED BY '$dbpassword';
+GRANT ALL PRIVILEGES ON $dbname.* TO '$userdb'@'%';
 FLUSH PRIVILEGES;
 exit " >> $directory/db/db_wordpress.sql
 echo -e "$purple(*)$blue Archivo SQL Creado correctamente"
@@ -139,7 +139,7 @@ mysql -u root -p < $directory/db/db_wordpress.sql
 echo -e "$purple(*)$bluela base de datos se configuro correctamente"
 echo "
 Database Name: $dbname
-Database User: $dbuser
+Database User: $userdb
 Database Password: $dbpassword
 " >> $directory/db_setup/sudb.txt
 echo -e "$purple(*)$blue la a continuacion iniciaremos el proceso de instalacion de wordpress"
