@@ -14,7 +14,7 @@ Este Script es un instalador Automatizado de Sitios Wordpres para servidores bas
 * chmod 777 *
 * ./install.sh
 
-.# Creditos:
+# Creditos:
 
 * Facu Salgado (ByteSalgado)
 * Regalanos una estrella, gracias.
