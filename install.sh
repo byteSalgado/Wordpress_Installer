@@ -29,6 +29,7 @@ exit
 
 }
 
+apt-get install toilet -y
 #comprobar directorio
 directory=$(pwd)
 
