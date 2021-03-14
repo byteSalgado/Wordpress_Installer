@@ -116,6 +116,41 @@ systemctl restart apache2.service
 clear
 echo -e "$purple(*)$blue Dependencias instaladas"
 sleep 1
+echo -e "$purple(*)$blue Ahora configuraremos su servidor FTP"
+sleep 3
+sudo apt install vsftpd -y
+clear
+echo -e "$purple(*)$blue FTP instalado correctamente..."
+sleep 2
+echo -e "$purple(*)$blue Ingrese un nombre de usuario para su FTP"
+read userftp
+sleep 2
+echo -e "$purple(*)$blue Muy bien ahora debera especificar la contraseña para el usuario"
+sleep 1
+sudo adduser $userftp
+echo "$userftp" | sudo tee -a /etc/vsftpd.user_list
+sudo chmod 7777 /var/www/html
+sleep 1
+sudo chown -R $userftp: /var/www/html
+sleep 1
+echo -e "$purple(*)$blue Usuario FTP configurado correctamente.."
+sleep 2
+echo -e "$purple(*)$blue ahora configuraremos su archivo de configuracion FTP.. please wait.."
+sleep 2
+echo"
+write_enable=YES
+user_sub_token=$userftp
+local_root=/var/www/html
+allow_writeable_chroot=YES
+chroot_local_user=YES
+userlist_enable=YES
+userlist_file=/etc/vsftpd.user_list
+userlist_deny=NO
+" >> /etc/vsftpd.conf
+sleep 2
+echo -e "$purple(*)$blue FTP configurado correctamente..."
+sleep 3
+clear
 echo -e "$purple(*)$blue Ahora debera configurar su password root para su MYSQL"
 sleep 4
 echo -e "$purple(*)$blue iniciara el proceso de configuracion, siga los pasos.."
