@@ -90,14 +90,14 @@ echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /et
 apt-get update -y
 apt-get install apache2 -y
 apt install php7.4-mysql -y 
-apt install install php7.4-common -y
+apt install php7.4-common -y
 sudo apt-get install php7.4-mysqli -y
 apt-get install mariadb-server -y 
 apt-get install mariadb-client -y
-apt-get install libapache2-mod-php7.0 -y 
+apt-get install libapache2-mod-php7.4 -y 
 apt-get install php7.4 -y
 apt-get install php7.4-gd -y
-apt-get installphp7.4-xml -y
+apt-get install php7.4-xml -y
 apt-get install php7.4-curl -y
 apt-get install php7.4-mbstring -y
 apt-get install php7.4-mcrypt -y
