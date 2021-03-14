@@ -83,18 +83,23 @@ sleep 1
 echo -e "$purple(*)$green Instalacion iniciada"
 sleep 2
 clear
+
+sudo apt -y install lsb-release apt-transport-https ca-certificates
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+apt-get update -y
 apt-get install apache2 -y
-apt install php7.0-mysql -y 
+apt install php7.4-mysql -y 
 apt-get install mariadb-server -y 
 apt-get install mariadb-client -y
 apt-get install libapache2-mod-php7.0 -y 
-apt-get install php7.0 -y
-apt-get install php7.0-gd -y
-apt-get installphp7.0-xml -y
-apt-get install php7.0-curl -y
-apt-get install php7.0-mbstring -y
-apt-get install php7.0-mcrypt -y
-apt-get install php7.0-xmlrpc -y
+apt-get install php7.4 -y
+apt-get install php7.4-gd -y
+apt-get installphp7.4-xml -y
+apt-get install php7.4-curl -y
+apt-get install php7.4-mbstring -y
+apt-get install php7.4-mcrypt -y
+apt-get install php7.4-xmlrpc -y
 apt-get install a2ensite -y
 apt-get install wget -y
 apt-get install unzip -y
