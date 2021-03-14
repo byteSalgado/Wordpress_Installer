@@ -136,7 +136,7 @@ sudo adduser $userftp
 echo "$userftp" | sudo tee -a /etc/vsftpd.user_list
 sudo chmod 7777 /var/www/html
 sleep 1
-sudo chown -R $userftp: /var/www/html
+sudo chown -R $userftp$s /var/www/html
 sleep 1
 echo -e "$purple(*)$blue Usuario FTP configurado correctamente.."
 sleep 2
