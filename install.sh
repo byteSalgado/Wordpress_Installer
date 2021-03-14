@@ -90,6 +90,8 @@ echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /et
 apt-get update -y
 apt-get install apache2 -y
 apt install php7.4-mysql -y 
+apt install install php7.4-common -y
+sudo apt-get install php7.4-mysqli -y
 apt-get install mariadb-server -y 
 apt-get install mariadb-client -y
 apt-get install libapache2-mod-php7.0 -y 
@@ -103,6 +105,7 @@ apt-get install php7.4-xmlrpc -y
 apt-get install a2ensite -y
 apt-get install wget -y
 apt-get install unzip -y
+service apache2 restart
 apt-get install tar -y
 systemctl start mariadb
 a2ensite default-ssl.conf
@@ -137,7 +140,7 @@ echo -e "$purple(*)$blue Usuario FTP configurado correctamente.."
 sleep 2
 echo -e "$purple(*)$blue ahora configuraremos su archivo de configuracion FTP.. please wait.."
 sleep 2
-echo"
+echo "
 write_enable=YES
 user_sub_token=$userftp
 local_root=/var/www/html
