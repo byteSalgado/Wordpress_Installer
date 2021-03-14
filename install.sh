@@ -5,6 +5,8 @@
 # trap function ctrl + c 
 trap ctrl_c INT
 
+s=":"
+
 #Colores
 white="\033[1;37m"
 grey="\033[0;37m"
