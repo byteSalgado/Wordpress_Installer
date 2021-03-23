@@ -155,6 +155,14 @@ userlist_deny=NO
 sleep 2
 echo -e "$purple(*)$blue FTP configurado correctamente..."
 sleep 3
+echo -e "$purple(*)$blue Habilitando Mod rwrite en apache"
+a2enmod rewrite
+sleep 2
+echo -e "$purple(*)$blue Reniciando Vsftpd"
+sleep 2
+service vsftpd restart
+systemctl restart apache2.service
+sleep 2
 clear
 echo -e "$purple(*)$blue Ahora debera configurar su password root para su MYSQL"
 sleep 4
